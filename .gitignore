@@ -1,3 +1,6 @@
+#Ignore the additonal config file that holds all 3rd party secrets, keys & passphrases
+EventList.Properties.Settings.config
+
 # Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
 [Bb]in/
 [Oo]bj/
