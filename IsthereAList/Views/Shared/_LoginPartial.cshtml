@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNet.Identity
+@using IsThereAList.Models
+@using IsThereAList.Extensions;
+@using System.Web.SessionState;
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @{
+                var user = this.Session.GetCurrentUser();
+                var name = user != null ? user.FirstName : "stranger";
+            }
+            @Html.ActionLink("Hello " + name + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" });
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

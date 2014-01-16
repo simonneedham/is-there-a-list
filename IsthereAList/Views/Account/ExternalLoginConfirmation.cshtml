@@ -1,0 +1,87 @@
+﻿@model IsThereAList.Models.ExternalRegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>Associate your @Model.LoginProvider account.</h3>
+
+@using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = Model.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h4>Registration</h4>
+    <hr />
+    @Html.ValidationSummary(true)
+    <p class="text-info">
+        You've successfully authenticated with <strong>@Model.LoginProvider</strong>.
+            Please confirm your details for this site below and click the Register button to finish
+            logging in.
+    </p>
+    @*
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EditableObject.UserName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EditableObject.UserName)
+        </div>
+    </div>
+    *@
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.EmailAddress, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EditableObject.EmailAddress, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EditableObject.EmailAddress)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.FirstName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EditableObject.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EditableObject.FirstName)
+        </div>
+    </div>
+                    
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.LastName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.EditableObject.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EditableObject.LastName)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.SendEmails, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.CheckBoxFor(m => m.EditableObject.SendEmails, new {  @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.EditableObject.SendEmails)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.DobDay, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.EditableObject.DobDay, new SelectList(Model.Days), String.Empty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EditableObject.DobDay)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EditableObject.DobMonth, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(m => m.EditableObject.DobMonth, new SelectList(Model.Months, "Number", "Name"), String.Empty, new { @class = "form-control" } )
+            @Html.ValidationMessageFor(m => m.EditableObject.DobMonth)
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

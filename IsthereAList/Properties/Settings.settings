@@ -1,0 +1,24 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="IsThereAList.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FacebookAppSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">80df390a66787f9b1518d664c82b79d4</Value>
+    </Setting>
+    <Setting Name="FaceboookAppId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">598662573539798</Value>
+    </Setting>
+    <Setting Name="TwitterKey" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">eyE20wKe0NKS7k36cYDHBg</Value>
+    </Setting>
+    <Setting Name="TwitterSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">FdBTkZ5QAUIzONraEbaDbIIsZARPlFp6vsR6g70ajIY</Value>
+    </Setting>
+    <Setting Name="MicrosoftClientId" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">000000004C10CFA9</Value>
+    </Setting>
+    <Setting Name="MicrosoftClientSecret" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">rc-BQR64jgW3zwaeefltJxp-1IKfMkjI</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

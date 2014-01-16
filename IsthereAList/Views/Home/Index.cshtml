@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Is there a list?</h1>
+    <p class="lead">For families that like publishing present lists.</p>
+    @if (!Request.IsAuthenticated) {
+        <p>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-large" })</p>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>How it all started</h2>
+        <p>
+            Some families like to have a present list for every birthday & Xmas event, (well mine does anyway).
+            The list is usually distributed by email.
+        </p>
+    </div>
+    <div class="col-md-4">
+        <h2>The problem with email &amp; lists</h2>
+        <p>Loads of people reply to the present list email when something has been purchased. The email chain gets very long, if your name is Jeff you get confused and buy something somebody else already bought.</p>
+    </div>
+    <div class="col-md-4">
+        <h2>You don&lsquo;t have to be called Jeff</h2>
+        <p>Well Jeff (and anybody else, you don't even have to be called Jeff to use our website) need struggle  no longer. This amazing website allows you to create, update & track people's celebratory event lists.</p>
+    </div>
+</div>
