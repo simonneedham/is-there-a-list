@@ -1,0 +1,52 @@
+﻿@model IsThereAList.Models.ClaimListItemViewModel
+
+@{
+    ViewBag.Title = "Present Details";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ListName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ListName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PictureUrl)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { listId = Model.ListId, listItemId = Model.ListItemId }) |
+    @Html.ActionLink("Back to List", "ListItem", new { listId = Model.ListId })
+</p>

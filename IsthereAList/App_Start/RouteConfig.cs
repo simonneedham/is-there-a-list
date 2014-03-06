@@ -13,11 +13,20 @@ namespace IsThereAList
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
+            routes.MapMvcAttributeRoutes();
+
+            //List/3/ListItem
+            //routes.MapRoute(
+            //    name: "ListListItems",
+            //    url: "List/{listId}/ListItem",
+            //    defaults: new { controller = "List", action = "ListItem" }
+            //);
+
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //);
         }
     }
 }

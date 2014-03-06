@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.RegularExpressions;
 
 namespace IsThereAList.Models
@@ -23,6 +25,14 @@ namespace IsThereAList.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        public string FullName
+        {
+            get
+            {
+                return String.Format("{0} {1}", FirstName ?? String.Empty, LastName ?? String.Empty);
+            }
+        }
+
         [Required, EmailAddress]
         [Display(Name = "Email address")]
         public string EmailAddress
@@ -43,12 +53,21 @@ namespace IsThereAList.Models
 
         [Range(1, 31)]
         [Required]
-        [Display(Name = "DoB Day")]
+        [Display(Name = "Day of Birth")]
         public int DobDay { get; set; }
 
         [Range(1, 12)]
         [Required]
-        [Display(Name = "DoB Month")]
+        [Display(Name = "Month of birth")]
         public int DobMonth { get; set; }
+
+        [InverseProperty("UserPurchased")]
+        public virtual ICollection<ListItem> PurchasedListItems { get; set; }
+        
+        [InverseProperty("UserUpdated")]
+        public virtual ICollection<ListItem> UpdatedListItems { get; set; }
+
+        [InverseProperty("Owner")]
+        public virtual ICollection<List> Lists { get; set; }
     }
 }

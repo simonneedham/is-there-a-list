@@ -104,4 +104,17 @@ namespace IsThereAList.Models
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
     }
+
+    public class AuthoriseUsersViewModel
+    {
+        public AuthoriseUsersViewModel()
+        {
+            this.ApplicationUserIds = new string[] { };
+        }
+
+        [Display(Name="Users to authorise")]
+        public IEnumerable<ApplicationUser> UnauthorisedUsers { get; set; }
+
+        public string[] ApplicationUserIds { get; set; }
+    }
 }

@@ -1,0 +1,86 @@
+﻿@using System;
+@model IsThereAList.Models.ClaimListItemViewModel
+
+@{
+    ViewBag.Title = "Present Details";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@if (Model.Deleted)
+{
+    <div class="alert alert-danger">This suggestion has been deleted by @Html.DisplayTextFor(Model.ListOwnerFirstName)</div> 
+}
+
+@if (Model.HasBeenPurchased)
+{
+    <div class="alert alert-info">This suggestion has beeen claimed by @Html.DispayTextFor(Model.UserPurchasedFirstName)</div>    
+}
+
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ListName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ListName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserPurchasedFullName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserPurchasedFullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PictureUrl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PictureUrl)
+        </dd>
+    </dl>
+</div>
+<p>
+    @if (Model.IsPuchasee || String.IsNullOrEmpty(Model.UserPurchasedFullName))
+    {
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ListItemId)
+            @if(String.IsNullOrEmpty(Model.UserPurchasedFullName))
+            {
+                <input type="submit" value="Claim this" class="btn btn-default" />
+            }
+            else if (Model.IsPuchasee)
+            {
+                <input type="submit" value="Chnaged my mind, unclaim this item." class="btn btn-default" />
+            }
+            <text>|</text>
+        }
+    }
+    @Html.ActionLink("Back to List", "ListItem", "ListItem", new { listId = Model.ListId})
+</p>

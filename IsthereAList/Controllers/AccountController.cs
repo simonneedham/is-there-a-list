@@ -14,6 +14,7 @@ using IsThereAList.Extensions;
 namespace IsThereAList.Controllers
 {
     [Authorize]
+    [RoutePrefix("account")]
     public class AccountController : Controller
     {
         public AccountController()
@@ -32,6 +33,7 @@ namespace IsThereAList.Controllers
         //
         // GET: /Account/Login
         [AllowAnonymous]
+        [Route("login")]
         public ActionResult Login(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
@@ -42,6 +44,7 @@ namespace IsThereAList.Controllers
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
+        [Route("login")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
@@ -74,6 +77,7 @@ namespace IsThereAList.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
+        [Route("register")]
         public ActionResult Register()
         {
             return View();
@@ -83,6 +87,7 @@ namespace IsThereAList.Controllers
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
+        [Route("register")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(InternalRegisterViewModel model)
         {
@@ -108,6 +113,7 @@ namespace IsThereAList.Controllers
         //
         // POST: /Account/Disassociate
         [HttpPost]
+        [Route("disassociate")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Disassociate(string loginProvider, string providerKey)
         {
@@ -126,6 +132,7 @@ namespace IsThereAList.Controllers
 
         //
         // GET: /Account/Manage
+        [Route("manage")]
         public ActionResult Manage(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
@@ -142,6 +149,7 @@ namespace IsThereAList.Controllers
         //
         // POST: /Account/Manage
         [HttpPost]
+        [Route("manage")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Manage(ManageUserViewModel model)
         {
@@ -193,6 +201,7 @@ namespace IsThereAList.Controllers
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
+        [Route("externallogin")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
@@ -204,6 +213,7 @@ namespace IsThereAList.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
+        [Route("externallogincallback")]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
@@ -253,6 +263,7 @@ namespace IsThereAList.Controllers
         //
         // POST: /Account/LinkLogin
         [HttpPost]
+        [Route("linklogin")]
         [ValidateAntiForgeryToken]
         public ActionResult LinkLogin(string provider)
         {
@@ -262,6 +273,7 @@ namespace IsThereAList.Controllers
 
         //
         // GET: /Account/LinkLoginCallback
+        [Route("linklogincallback")]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
@@ -281,6 +293,7 @@ namespace IsThereAList.Controllers
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
         [AllowAnonymous]
+        [Route("externalloginconfirmation")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalRegisterViewModel model, string returnUrl)
         {
@@ -328,6 +341,7 @@ namespace IsThereAList.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+        [Route("logoff")]
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
@@ -338,14 +352,44 @@ namespace IsThereAList.Controllers
         }
 
         //
+        //GET: /Account/AuthoriseUsers
+        [Route("authoriseusers")]
+        public async Task<ActionResult> AuthoriseUsers()
+        {
+            var users = await Repository.GetUnauthorisedUsersAsync();
+
+            var vm = new AuthoriseUsersViewModel { UnauthorisedUsers = users };
+            return View(vm);
+        }
+
+        //
+        //POST: /Account/AuthoriseUsers
+        [HttpPost]
+        [Route("authoriseusers")]
+        public async Task<ActionResult> AuthoriseUsers(AuthoriseUsersViewModel viewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                await Repository.AuthoriseUsersAsync(viewModel.ApplicationUserIds); 
+            }
+
+            var users = await Repository.GetUnauthorisedUsersAsync();
+            var vm = new AuthoriseUsersViewModel { UnauthorisedUsers = users };
+            return View(vm);
+        }
+
+
+        //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
+        [Route("externalloginfailure")]
         public ActionResult ExternalLoginFailure()
         {
             return View();
         }
 
         [ChildActionOnly]
+        [Route("removeaccountlist")]
         public ActionResult RemoveAccountList()
         {
             var linkedAccounts = UserManager.GetLogins(User.Identity.GetUserId());

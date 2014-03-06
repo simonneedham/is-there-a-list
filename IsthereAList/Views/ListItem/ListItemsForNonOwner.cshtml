@@ -1,0 +1,62 @@
+﻿@using System
+@model IsThereAList.Models.List
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<br />
+<h2>@Model.Name</h2>
+<hr />
+
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListItems.FirstOrDefault().PictureUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListItems.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ListItems.FirstOrDefault().UserPurchased)
+            </th>
+        </tr>
+        <tbody>
+            @foreach (var item in Model.ListItems)
+            {
+                var prchsd = (item.UserPurchased != null);
+                string prchsdClass = prchsd ? "purchasedRow" : null;
+                string dltdClass = item.Deleted ? "deletedRow" : null;
+
+                <tr class="@prchsdClass @dltdClass">
+                    <td>
+                        @Html.ActionLink("Claim this one", "Claim", "ListItem", new { listId = item.ListId, listItemId = item.ListItemId }, null) |
+                        @Html.ActionLink("Details", "Details", "ListItem", new { listId = item.ListId, listItemId = item.ListItemId }, null)
+                    </td>
+                    <td>
+                        <img src="@item.PictureUrl" />
+                    </td>
+                    <td>
+                        @{
+                        if(!String.IsNullOrEmpty(item.Url))
+                        <a href="@item.Url">@item.Name</a>
+                        } else {
+                            @Html.ActionLink(item.Name, "Details", new { id = item.ListItemId })
+                        }
+                        @if (!String.IsNullOrEmpty(item.Description))
+                        {
+                            <br />@Html.DisplayTextFor(m => item.Description)
+                        }
+                    </td>
+                    <td>
+                        @if(prchsd) {
+                            Html.DisplayTextFor(m => item.UserPurchased.FirstName);
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

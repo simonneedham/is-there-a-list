@@ -40,3 +40,21 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-valid {
     display: none;
 }
+
+/*My CSS*/
+.deletedRow td {
+    text-decoration: line-through;
+}
+
+.purchasedRow td {
+    font-style: italic;
+    color: GrayText;
+}
+
+dl.dl-horizontal dd {
+    margin-bottom: 10px;
+}
+
+.wide {
+    width: 80%;
+}

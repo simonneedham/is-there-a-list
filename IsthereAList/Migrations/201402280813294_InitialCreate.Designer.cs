@@ -13,7 +13,7 @@ namespace IsThereAList.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201401070736574_InitialCreate"; }
+            get { return "201402280813294_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

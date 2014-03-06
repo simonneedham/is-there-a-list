@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IsThereAList.Models.List>
+
+@{
+    ViewBag.Title = "Active Lists";
+}
+
+<br />
+<h2>@ViewBag.Title</h2>
+<hr />
+
+<table class="table table-striped table-bordered table-condensed">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.RouteLink(item.Name, "ListListItems", new { listId = item.ListId })
+            </td>
+        </tr>
+    }
+
+</table>

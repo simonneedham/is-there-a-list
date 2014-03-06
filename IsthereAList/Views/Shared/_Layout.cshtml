@@ -22,8 +22,8 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Active Lists", "Index", "ActiveLists")</li>
-                    <li>@Html.ActionLink("My Lists", "Index", "MyLists")</li>
+                    <li>@Html.ActionLink("Active Lists", "Active", "List")</li>
+                    <li>@Html.ActionLink("My Lists", "My", "List")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -32,8 +32,11 @@
     <div class="container body-content">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Beaconsfield Software Limited</p>
+        <footer class="navbar .navbar-fixed-bottom">
+            <p>
+                Developed by Beaconsfield Software. Website code licensed under the <a href="http://opensource.org/licenses/MIT">MIT Licence</a><br>
+                Source hosted by <a href="http://www.github.com/simonneedham/is-there-a-list">GitHub</a>
+            </p>
         </footer>
     </div>
 

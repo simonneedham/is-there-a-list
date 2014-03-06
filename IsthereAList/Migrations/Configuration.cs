@@ -20,6 +20,11 @@ namespace IsThereAList.Migrations
                 new IdentityRole { Name = "Admin"},
                 new IdentityRole { Name = "User" }
             );
+
+            context.ListTypes.AddOrUpdate(
+                new IsThereAList.Models.ListType { ListTypeId = 1, Code = "BDY", Name = "Birthday" },
+                new IsThereAList.Models.ListType { ListTypeId = 2, Code = "XMS", Name = "Christmas" }
+            );
         }
     }
 }

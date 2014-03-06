@@ -7,8 +7,12 @@ using System.Web.Mvc;
 namespace IsThereAList.Controllers
 {
     [Authorize]
+    [RoutePrefix("home")]
     public class HomeController : Controller
     {
+        [Route()]
+        //[Route("/")]
+        [Route("~/")]
         [AllowAnonymous]
         public ActionResult Index()
         {
