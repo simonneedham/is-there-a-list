@@ -86,7 +86,7 @@ namespace IsThereAList.Models
             using (var db = new ApplicationDbContext())
             {
                 return await db.Lists.Include(i => i.ListItems)
-                                     .Include("ListItems.UserPurchased")
+                                     .Include(i => i.ListItems.Select(li => li.UserPurchased))
                                      .Where(
                                             w => w.ListId == listId &&
                                             (

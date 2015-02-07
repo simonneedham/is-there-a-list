@@ -5,8 +5,13 @@
 <div class="jumbotron visible-lg visible-md">
     <h1>Is there a list?</h1>
     <p class="lead">For families that like publishing present lists.</p>
-    @if (!Request.IsAuthenticated) {
+    @if (!Request.IsAuthenticated)
+    {
         <p>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-large" })</p>
+    }
+    else
+    {
+        <p>@Html.ActionLink("See all the currently active lists >>", "Active", "List", routeValues: null, htmlAttributes: new { @class = "btn btn-primary btn-large" })</p>
     }
 </div>
 

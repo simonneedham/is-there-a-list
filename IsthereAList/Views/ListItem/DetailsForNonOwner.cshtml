@@ -11,12 +11,12 @@
 
 @if (Model.Deleted)
 {
-    <div class="alert alert-danger">This suggestion has been deleted by @Html.DisplayTextFor(Model.ListOwnerFirstName)</div> 
+    <div class="alert alert-danger">This suggestion has been deleted by @Html.DisplayTextFor(model => model.ListOwnerFirstName)</div> 
 }
 
 @if (Model.HasBeenPurchased)
 {
-    <div class="alert alert-info">This suggestion has beeen claimed by @Html.DispayTextFor(Model.UserPurchasedFirstName)</div>    
+    <div class="alert alert-info">This suggestion has beeen claimed by @Html.DisplayTextFor(model => model.UserPurchasedFullName)</div>    
 }
 
 <div>
@@ -65,19 +65,19 @@
     </dl>
 </div>
 <p>
-    @if (Model.IsPuchasee || String.IsNullOrEmpty(Model.UserPurchasedFullName))
+    @if (Model.IsPurchasee || String.IsNullOrEmpty(Model.UserPurchasedFullName))
     {
-        @using (Html.BeginForm())
+        using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ListItemId)
-            @if(String.IsNullOrEmpty(Model.UserPurchasedFullName))
+            if(String.IsNullOrEmpty(Model.UserPurchasedFullName))
             {
                 <input type="submit" value="Claim this" class="btn btn-default" />
             }
-            else if (Model.IsPuchasee)
+            else if (Model.IsPurchasee)
             {
-                <input type="submit" value="Chnaged my mind, unclaim this item." class="btn btn-default" />
+                <input type="submit" value="Changed my mind, I'm not buying this any more." class="btn btn-default" />
             }
             <text>|</text>
         }

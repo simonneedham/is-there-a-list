@@ -24,35 +24,36 @@
             </th>
         </tr>
         <tbody>
-            @foreach (var item in Model.ListItems)
-            {
+            @foreach (var item in Model.ListItems) {
                 var prchsd = (item.UserPurchased != null);
                 string prchsdClass = prchsd ? "purchasedRow" : null;
                 string dltdClass = item.Deleted ? "deletedRow" : null;
 
                 <tr class="@prchsdClass @dltdClass">
                     <td>
-                        @Html.ActionLink("Claim this one", "Claim", "ListItem", new { listId = item.ListId, listItemId = item.ListItemId }, null) |
-                        @Html.ActionLink("Details", "Details", "ListItem", new { listId = item.ListId, listItemId = item.ListItemId }, null)
+                        @if(!prchsd)
+                        {
+                            @Html.ActionLink("Claim this one", "Claim", new { listId = item.ListId, listItemId = item.ListItemId }, null)
+                            <text> | </text>
+                        }
+                        @Html.ActionLink("Details", "Claim", new { listId = item.ListId, listItemId = item.ListItemId }, null)
                     </td>
                     <td>
                         <img src="@item.PictureUrl" />
                     </td>
                     <td>
-                        @{
-                        if(!String.IsNullOrEmpty(item.Url))
+                        @if (!String.IsNullOrEmpty(item.Url)) { 
                         <a href="@item.Url">@item.Name</a>
                         } else {
-                            @Html.ActionLink(item.Name, "Details", new { id = item.ListItemId })
+                            @Html.ActionLink(item.Name, "Claim", new { listId = item.ListId, listItemId = item.ListItemId })
                         }
-                        @if (!String.IsNullOrEmpty(item.Description))
-                        {
-                            <br />@Html.DisplayTextFor(m => item.Description)
+                        @if (!String.IsNullOrEmpty(item.Description)) {
+                            <br />@Html.DisplayTextFor(t => item.Description)
                         }
                     </td>
                     <td>
                         @if(prchsd) {
-                            Html.DisplayTextFor(m => item.UserPurchased.FirstName);
+                            @Html.DisplayTextFor(t => item.UserPurchased.FirstName);
                         }
                     </td>
                 </tr>
